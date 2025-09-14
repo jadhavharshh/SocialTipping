@@ -6,12 +6,32 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
+    "check-types": "turbo run check-types",
+    "anchor:build": "anchor build",
+    "anchor:test": "anchor test",
+    "anchor:deploy:localnet": "anchor deploy --provider.cluster localnet",
+    "anchor:deploy:devnet": "anchor deploy --provider.cluster devnet",
+    "anchor:deploy:mainnet": "anchor deploy --provider.cluster mainnet",
+    "validator:start": "solana-test-validator",
+    "validator:stop": "solana-test-validator --reset",
+    "test:anchor": "ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.31.1",
+    "@solana/web3.js": "^1.95.7",
+    "@solana/spl-token": "^0.4.1",
+    "bn.js": "^5.2.1"
   },
   "devDependencies": {
     "prettier": "^3.6.2",
     "turbo": "^2.5.6",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "ts-mocha": "^10.0.0",
+    "mocha": "^10.7.0",
+    "chai": "^5.1.1",
+    "@types/mocha": "^10.0.8",
+    "@types/chai": "^5.0.0",
+    "@types/bn.js": "^5.1.6"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {

@@ -27,6 +27,12 @@ out/
 build
 dist
 
+# Solana/Anchor specific
+target/
+test-ledger/
+.anchor/
+*.so
+.program-keys/
 
 # Debug
 npm-debug.log*

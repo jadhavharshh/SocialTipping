@@ -14,7 +14,15 @@
     "@repo/ui": "workspace:*",
     "next": "^15.5.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "@coral-xyz/anchor": "^0.31.1",
+    "@solana/web3.js": "^1.95.7",
+    "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/wallet-adapter-react-ui": "^0.9.35",
+    "@solana/wallet-adapter-wallets": "^0.19.37",
+    "@solana/spl-token": "^0.4.1",
+    "bn.js": "^5.2.1"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
@@ -22,6 +30,7 @@
     "@types/node": "^22.15.3",
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.1",
+    "@types/bn.js": "^5.1.6",
     "eslint": "^9.34.0",
     "typescript": "5.9.2"
   }

@@ -16,6 +16,14 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "anchor:build": {
+      "cache": false,
+      "outputs": ["target/**", "!target/debug/**"]
+    },
+    "anchor:test": {
+      "dependsOn": ["anchor:build"],
+      "cache": false
     }
   }
 }
