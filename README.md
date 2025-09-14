@@ -1,135 +1,303 @@
-# Turborepo starter
+# SocialTipping
 
-This Turborepo starter is maintained by the Turborepo core team.
+A decentralized social tipping platform built on Solana that allows users to register usernames and send cryptocurrency tips through easy-to-remember handles.
 
-## Using this example
+## What is SocialTipping?
 
-Run the following command:
+SocialTipping is an open-source Solana-based application that simplifies cryptocurrency tipping by enabling users to register custom usernames and receive tips through memorable handles instead of complex wallet addresses. Built with modern web technologies and Solana's high-performance blockchain, it provides a seamless experience for both content creators and their supporters.
 
-```sh
-npx create-turbo@latest
+## Why SocialTipping?
+
+Current cryptocurrency tipping solutions are either **complex to use**, **centralized**, or **limited to specific platforms**.
+
+SocialTipping is different:
+
+- ✅ **Decentralized** – Built on Solana blockchain, no central authority
+- 🚀 **Fast & Cheap** – Leverages Solana's low fees and instant transactions
+- 🔒 **Self-Custody** – Users maintain full control of their funds
+- 📱 **User-Friendly** – Simple username system instead of complex addresses
+- 🌐 **Cross-Platform** – Use anywhere, not limited to specific social media
+- 🛠️ **Open Source** – Transparent, auditable, and community-driven
+- ⚡ **Modern Stack** – Built with the latest web and blockchain technologies
+
+## Tech Stack
+
+SocialTipping is built with modern and reliable technologies:
+
+- **Blockchain**: Solana, Anchor Framework
+- **Frontend**: Next.js, React, TypeScript, TailwindCSS
+- **Wallet Integration**: Solana Wallet Adapter
+- **Smart Contracts**: Rust, Anchor
+- **Build System**: Turbo monorepo, pnpm
+- **Development**: TypeScript, ESLint, Prettier
+
+## Getting Started
+
+### Prerequisites
+
+**Required Versions:**
+
+- [Node.js](https://nodejs.org/en/download) (v18 or higher)
+- [pnpm](https://pnpm.io) (v9 or higher)
+- [Rust](https://rustup.rs/) (latest stable)
+- [Solana CLI](https://docs.solana.com/cli/install-solana-cli-tools) (v1.18 or higher)
+- [Anchor](https://www.anchor-lang.com/docs/installation) (v0.31.1)
+
+Before running the application, you'll need to set up the Solana development environment and configure local validator.
+
+### Setup Options
+
+<details open>
+<summary><b>Local Development Setup (Recommended)</b></summary>
+
+#### Quick Start Guide
+
+1. **Clone and Install**
+
+   ```bash
+   # Clone the repository
+   git clone https://github.com/yourusername/SocialTipping.git
+   cd SocialTipping
+
+   # Install dependencies
+   pnpm install
+   ```
+
+2. **Set Up Solana Environment**
+
+   ```bash
+   # Generate a keypair for development
+   solana-keygen new --no-bip39-passphrase
+
+   # Set Solana to use local validator
+   solana config set --url localhost
+   ```
+
+3. **Start Local Blockchain**
+
+   ```bash
+   # Start local Solana validator
+   ./start-validator.sh
+   ```
+
+4. **Build and Deploy Smart Contract**
+
+   ```bash
+   # Build the Anchor program
+   pnpm run anchor:build
+
+   # Deploy to local validator
+   pnpm run anchor:deploy:localnet
+   ```
+
+5. **Start the Application**
+
+   ```bash
+   # Start all applications
+   pnpm run dev
+   ```
+
+6. **Open in Browser**
+
+   Visit [http://localhost:3000](http://localhost:3000)
+
+</details>
+
+### Environment Setup
+
+1. **Solana Configuration**
+
+   The application is preconfigured for local development. Environment variables are set in `.env.local`:
+
+   ```env
+   NEXT_PUBLIC_SOLANA_NETWORK=localnet
+   NEXT_PUBLIC_RPC_URL=http://localhost:8899
+   NEXT_PUBLIC_PROGRAM_ID=your_program_id_after_deployment
+   ```
+
+2. **Wallet Setup**
+
+   - The development keypair is automatically generated during setup
+   - For production, configure your wallet through the Solana Wallet Adapter
+   - Supported wallets: Phantom, Solflare, Coinbase Wallet, and more
+
+3. **Network Configuration**
+
+   - **Localnet**: Fast development with instant finality
+   - **Devnet**: Testing with live network conditions
+   - **Mainnet**: Production deployment with real SOL
+
+### Development Workflow
+
+#### Daily Development
+```bash
+# 1. Start the local blockchain
+./start-validator.sh
+
+# 2. Start all applications in development mode
+pnpm run dev
+
+# 3. Make changes to smart contracts or frontend
+# Smart Contracts: Edit programs/src/lib.rs
+# Frontend: Edit apps/web/src/
+
+# 4. Build and test changes
+pnpm run anchor:build    # Build Solana program
+pnpm run anchor:test     # Run program tests
+pnpm run build          # Build all applications
 ```
 
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+#### Code Quality Checks
+```bash
+pnpm run lint           # Check code style and potential issues
+pnpm run check-types    # Verify TypeScript compilation
+pnpm run format         # Auto-format all code
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+#### Testing
+```bash
+# Run Anchor program tests
+pnpm run anchor:test
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+# Monitor blockchain activity
+./monitor-activity.sh
 ```
 
-### Develop
-
-To develop all apps and packages, run the following command:
+## Project Structure
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+SocialTipping/
+├── programs/                 # Solana smart contracts
+│   ├── src/lib.rs           # Main program logic
+│   └── Cargo.toml           # Rust dependencies
+├── apps/
+│   ├── web/                 # Next.js frontend application
+│   └── docs/                # Documentation site
+├── packages/                # Shared packages
+│   ├── ui/                  # React component library
+│   ├── eslint-config/       # Shared ESLint configuration
+│   └── typescript-config/   # Shared TypeScript configuration
+├── tests/                   # Anchor program tests
+├── migrations/              # Deployment scripts
+├── Anchor.toml             # Anchor framework configuration
+├── start-validator.sh      # Local validator startup script
+└── .env.local             # Environment variables
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## Available Commands
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
+### Development Commands
+```bash
+# Start all applications
+pnpm run dev
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+# Build all packages
+pnpm run build
 
-### Remote Caching
+# Run type checking
+pnpm run check-types
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+# Lint all code
+pnpm run lint
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+# Format code
+pnpm run format
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### Solana/Anchor Commands
+```bash
+# Build smart contracts
+pnpm run anchor:build
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+# Run smart contract tests
+pnpm run anchor:test
 
+# Deploy to localnet
+pnpm run anchor:deploy:localnet
+
+# Deploy to devnet
+pnpm run anchor:deploy:devnet
+
+# Deploy to mainnet
+pnpm run anchor:deploy:mainnet
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+### Blockchain Commands
+```bash
+# Start local validator
+./start-validator.sh
+
+# Monitor blockchain activity
+./monitor-activity.sh
+
+# Check SOL balance
+solana balance
+
+# Request test SOL
+solana airdrop 1
 ```
 
-## Useful Links
+## Core Features
 
-Learn more about the power of Turborepo:
+### Username Registration
+- Register unique usernames on-chain
+- Permanent, transferable username ownership
+- Anti-squatting mechanisms
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+### Social Tipping
+- Send tips using @username instead of wallet addresses
+- Support for SOL and SPL tokens
+- Instant, low-cost transactions
+
+### Wallet Integration
+- Support for all major Solana wallets
+- Seamless transaction signing
+- Mobile wallet compatibility
+
+## Development Phases
+
+The project is developed in phases. See [PHASES.md](./PHASES.md) for detailed roadmap:
+
+- ✅ **Phase 1**: Project foundation and setup
+- 🚧 **Phase 2**: Smart contract core development
+- 📋 **Phase 3**: Frontend user interface
+- 📋 **Phase 4**: Advanced features and optimization
+
+## Contributing
+
+We welcome contributions to SocialTipping! Here's how to get involved:
+
+1. **Fork the repository**
+2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Make your changes** following our coding standards
+4. **Run tests** (`pnpm run anchor:test` and `pnpm run lint`)
+5. **Submit a pull request**
+
+Please read our coding standards and ensure all tests pass before submitting.
+
+## Security
+
+SocialTipping prioritizes security:
+
+- **Audited Smart Contracts**: All programs undergo thorough security review
+- **Type Safety**: Full TypeScript implementation prevents common errors
+- **Environment Separation**: Clear separation between development, testing, and production
+- **Best Practices**: Following Solana and Anchor security guidelines
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## Documentation
+
+- [Phase 1 Setup Documentation](./PHASE1.md) - Complete setup and architecture guide
+- [Project Specification](./PROJECT.md) - Detailed project requirements
+- [Development Phases](./PHASES.md) - Full development roadmap
+
+## Support
+
+If you need help or have questions:
+
+- Check the documentation files in this repository
+- Review the Phase 1 setup guide for development environment issues
+- Open an issue for bugs or feature requests
